@@ -1,0 +1,32 @@
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-12 20:19:18
+project --topLevelPackage pl.edu.agh.toik.twittercrawler --projectName twitter-crawler --java 7 --packaging WAR
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log closed at 2015-05-12 20:19:18
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-12 20:19:23
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+entity jpa --class ~.model.Entry
+field string --fieldName author --notNull 
+field string --fieldName content --notNull 
+repository jpa --interface ~.repo.EntryRepository --entity ~.model.Entry
+web jsf setup --implementation APACHE_MYFACES --library PRIMEFACES --theme EGGPLANT 
+web jsf all --package ~.web
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log closed at 2015-05-12 21:18:39
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-12 23:15:01
+entity jpa --class ~.model.Tweet --activeRecord false
+field string --fieldName id
+field string --fieldName text
+repository jpa --interface ~.repo.TweetRepository --entity ~.model.Tweet
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log closed at 2015-05-12 23:55:10
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-13 11:56:43
+focus --class ~.model.Tweet 
+focus --class ~.model.Tag 
+field set --fieldName tweets --type ~.model.Tweet --cardinality MANY_TO_MANY --mappedBy tags
+focus --class ~.model.Tweet
+field set --type ~.model.Tag --fieldName tags --cardinality MANY_TO_MANY 
+focus --class ~.repo.TweetRepository 
+// [failed] finder list 
+focus --class ~.model.Tweet
+// [failed] finder list 
+focus --class ~.model.Tag
+finder list 
+finder add findTagsByContentEquals
+service type --interface ~.service.TweetService --entity ~.model.Tweet
