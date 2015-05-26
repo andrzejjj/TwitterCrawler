@@ -25,7 +25,7 @@ public class CrawlRunnable implements Runnable {
 	@Override
 	public void run() {
 		for (Tag tag : tagRepository.findAll()){
-			LOGGER.info("Logging tag: " + tag);
+			LOGGER.info("Crawling tag: " + tag);
 			List<Tweet> results = TwitterUtil.searchTwitter(tag.getContent(), tweetService.findMaxTweetId(tag.getContent()));
 			for (Tweet t : results){
 				Set<Tag> tags = t.getTags();
