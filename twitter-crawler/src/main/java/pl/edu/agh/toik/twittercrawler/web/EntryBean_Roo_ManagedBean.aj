@@ -36,7 +36,7 @@ privileged aspect EntryBean_Roo_ManagedBean {
     declare @type: EntryBean: @SessionScoped;
     
     @Autowired
-    TagRepository EntryBean.entryRepository;
+    TagRepository EntryBean.tagRepository;
     
     private String EntryBean.name = "Tags";
     
@@ -80,7 +80,7 @@ privileged aspect EntryBean_Roo_ManagedBean {
     }
     
     public String EntryBean.findAllTags() {
-        allTags = entryRepository.findAll();
+        allTags = tagRepository.findAll();
         dataVisible = !allTags.isEmpty();
         return null;
     }
@@ -331,10 +331,10 @@ privileged aspect EntryBean_Roo_ManagedBean {
     public String EntryBean.persist() {
         String message = "";
         if (tag.getId() != null) {
-            entryRepository.save(tag);
+            tagRepository.save(tag);
             message = "message_successfully_updated";
         } else {
-            entryRepository.save(tag);
+            tagRepository.save(tag);
             message = "message_successfully_created";
         }
         RequestContext context = RequestContext.getCurrentInstance();
@@ -348,7 +348,7 @@ privileged aspect EntryBean_Roo_ManagedBean {
     }
     
     public String EntryBean.delete() {
-        entryRepository.delete(tag);
+        tagRepository.delete(tag);
         FacesMessage facesMessage = MessageFactory.getMessage("message_successfully_deleted", "Tag");
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         reset();

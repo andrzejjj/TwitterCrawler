@@ -6,11 +6,10 @@ package pl.edu.agh.toik.twittercrawler.web.converter;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import pl.edu.agh.toik.twittercrawler.model.Tag;
 import pl.edu.agh.toik.twittercrawler.repo.TagRepository;
+import pl.edu.agh.toik.twittercrawler.web.converter.TagConverter;
 
 privileged aspect TagConverter_Roo_Converter {
     
