@@ -17,9 +17,6 @@ privileged aspect TweetServiceImpl_Roo_Service {
     
     declare @type: TweetServiceImpl: @Transactional;
     
-    @Autowired
-    TweetRepository TweetServiceImpl.tweetRepository;
-    
     public long TweetServiceImpl.countAllTweets() {
         return tweetRepository.count();
     }

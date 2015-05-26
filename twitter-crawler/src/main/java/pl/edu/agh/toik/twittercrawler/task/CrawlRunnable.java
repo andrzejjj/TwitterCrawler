@@ -1,6 +1,7 @@
 package pl.edu.agh.toik.twittercrawler.task;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +25,9 @@ public class CrawlRunnable implements Runnable {
 			
 			List<Tweet> results = TwitterUtil.searchTwitter(tag.getContent(), tweetService.findMaxTweetId(tag.getContent()));
 			for (Tweet t : results){
+				Set<Tag> tags = t.getTags();
+				tags.add(tag);
+				t.setTags(tags);
 				tweetService.saveTweet(t);
 			}
 		}

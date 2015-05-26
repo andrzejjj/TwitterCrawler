@@ -17,6 +17,7 @@ public class TwitterUtil {
 	
 	private static String token = null;
 	
+	@SuppressWarnings("unchecked")
 	public static List<Tweet> searchTwitter(String query, long lastId) {
 		if (token == null || token.isEmpty()){
 			token = fetchApplicationAccessToken();
@@ -25,7 +26,7 @@ public class TwitterUtil {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
-        Map<String, ?> result = rest.exchange("https://api.twitter.com/1.1/search/tweets.json?q={query}", HttpMethod.GET, requestEntity, Map.class, query).getBody();
+        Map<String, ?> result = rest.exchange("https://api.twitter.com/1.1/search/tweets.json?q={query}&since_id={lastId}", HttpMethod.GET, requestEntity, Map.class, query, lastId).getBody();
         List<Map<String, ?>> statuses = (List<Map<String, ?>>) result.get("statuses");
         List<Tweet> tweets = new ArrayList<Tweet>();
         for (Map<String, ?> status : statuses) {
