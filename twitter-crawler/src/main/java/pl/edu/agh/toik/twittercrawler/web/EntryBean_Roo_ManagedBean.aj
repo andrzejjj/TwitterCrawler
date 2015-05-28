@@ -6,7 +6,6 @@ package pl.edu.agh.toik.twittercrawler.web;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.PostConstruct;
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -16,14 +15,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.message.Message;
 import org.primefaces.component.outputlabel.OutputLabel;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CloseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import pl.edu.agh.toik.twittercrawler.model.Tag;
 import pl.edu.agh.toik.twittercrawler.repo.TagRepository;
 import pl.edu.agh.toik.twittercrawler.web.EntryBean;

@@ -35,3 +35,8 @@ focus --class ~.service.TweetService
 // [failed] finder list 
 focus --class ~.model.Tag
 finder list
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-28 00:43:37
+jpa setup --provider HIBERNATE --database POSTGRES 
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log closed at 2015-05-28 01:07:11
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log opened at 2015-05-28 01:18:22
+// Spring Roo 1.3.1.RELEASE [rev f4f5256] log closed at 2015-05-28 01:25:12
