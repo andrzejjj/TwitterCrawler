@@ -8,5 +8,5 @@ import pl.edu.agh.toik.twittercrawler.model.Tweet;
 @RooJpaRepository(domainType = Tweet.class)
 public interface TweetRepository {
 	@Query("select max(t.id)  from Tweet as t")
-	long selectMaxId(@Param("tag") String tag);
+	long selectMaxId();
 }
