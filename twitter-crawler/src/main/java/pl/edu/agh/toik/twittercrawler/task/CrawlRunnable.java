@@ -1,11 +1,13 @@
 package pl.edu.agh.toik.twittercrawler.task;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.edu.agh.toik.twittercrawler.model.Stats;
 import pl.edu.agh.toik.twittercrawler.model.Tag;
 import pl.edu.agh.toik.twittercrawler.model.Tweet;
 import pl.edu.agh.toik.twittercrawler.repo.TagRepository;
@@ -28,6 +30,7 @@ public class CrawlRunnable implements Runnable {
 	@Override
 	@Transactional
 	public void run() {
+		int totalInserted = 0;
 		for (Tag tag : tagRepository.findAll()){
 			LOGGER.info("Crawling tag: " + tag);
 			List<Tweet> results = TwitterUtil.searchTwitter(tag.getContent(), tweetService.findMaxTweetId(tag.getContent()));
@@ -37,9 +40,12 @@ public class CrawlRunnable implements Runnable {
 				t.setTags(tags);
 				tweetService.saveTweet(t);
 			}
-			LOGGER.info("Saved " + results.size() + " results.");
+			totalInserted += results.size();
 		}
-
+		Stats stats = new Stats();
+		stats.setCreationDate(new Date());
+		stats.setRecordsInserted(totalInserted);
+		stats.persist();
 	}
 
 	public void setTweetService(TweetService tweetService) {
