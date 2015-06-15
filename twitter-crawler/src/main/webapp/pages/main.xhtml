@@ -16,10 +16,9 @@
       <h:outputText id="welcomeText" value="#{messages.label_welcome_text}" />
 	
       <p />
-      <div> <h:outputText value="Komor " /><h:outputText value="#{mainBean.komorowskiEntries}" /></div>
-      <div> <h:outputText value="Korwin " /><h:outputText value="#{mainBean.korwinEntries}" /></div>
-      <div> <h:outputText value="Duda" /><h:outputText value="#{mainBean.dudaEntries}" /></div>
-      <div> <h:outputText value="Kukiz" /><h:outputText value="#{mainBean.kukizEntries}" /></div>
+		<p:chart type="pie" model="#{mainBean.pieModel}" style="width:600px;height:400px" />
+		<p/>
+		<p:chart type="line" model="#{mainBean.lineChartModel}" style="width:600px;" />
       <div id="media"></div>
     </p:panel>
   </ui:define>

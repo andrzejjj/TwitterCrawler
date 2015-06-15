@@ -60,6 +60,9 @@
 		<constructor-arg index="0" ref="tweetServiceImpl"/>
 		<constructor-arg index="1" ref="tagRepository"/>
 	</bean>
+	<bean class="pl.edu.agh.toik.twittercrawler.web.MainBean" id="mainBean">
+		<constructor-arg index="0" ref="tagRepository"/>	
+	</bean>
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
