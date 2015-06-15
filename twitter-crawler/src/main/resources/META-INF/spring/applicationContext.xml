@@ -56,6 +56,10 @@
 		<property name="minEvictableIdleTimeMillis" value="1800000" />
 		<property name="validationQuery" value="SELECT version();" />
 	</bean>
+	<bean class="pl.edu.agh.toik.twittercrawler.task.CrawlExecutor" id="crawlExecutor">
+		<constructor-arg index="0" ref="tweetServiceImpl"/>
+		<constructor-arg index="1" ref="tagRepository"/>
+	</bean>
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />

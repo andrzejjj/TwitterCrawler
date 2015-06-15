@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import pl.edu.agh.toik.twittercrawler.model.Tag;
 import pl.edu.agh.toik.twittercrawler.model.Tweet;
@@ -14,12 +13,15 @@ import pl.edu.agh.toik.twittercrawler.twitter.TwitterUtil;
 
 public class CrawlRunnable implements Runnable {
 
-	@Autowired
-	TweetService tweetService;
+	private TweetService tweetService;
 	
-	@Autowired
-	TagRepository tagRepository;
+	private TagRepository tagRepository;
 	
+	public CrawlRunnable(TweetService tweetService, TagRepository tagRepository) {
+		this.tweetService = tweetService;
+		this.tagRepository = tagRepository;
+	}
+
 	private static final Logger LOGGER = Logger.getLogger(CrawlRunnable.class.getCanonicalName());
 	
 	@Override
@@ -36,6 +38,14 @@ public class CrawlRunnable implements Runnable {
 			LOGGER.info("Saved " + results.size() + " results.");
 		}
 
+	}
+
+	public void setTweetService(TweetService tweetService) {
+		this.tweetService = tweetService;
+	}
+
+	public void setTagRepository(TagRepository tagRepository) {
+		this.tagRepository = tagRepository;
 	}
 
 }
