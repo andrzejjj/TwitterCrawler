@@ -11,7 +11,7 @@ public class TweetServiceImpl implements TweetService {
 	
 	@Override
 	public long findMaxTweetId(String tag){
-		return tweetRepository.selectMaxId();
+		Long result = tweetRepository.selectMaxId();
+		return result == null ? 0 : result ;
 	}
-	
 }

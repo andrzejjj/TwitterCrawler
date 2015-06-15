@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.agh.toik.twittercrawler.model.Tag;
 import pl.edu.agh.toik.twittercrawler.model.Tweet;
@@ -25,6 +26,7 @@ public class CrawlRunnable implements Runnable {
 	private static final Logger LOGGER = Logger.getLogger(CrawlRunnable.class.getCanonicalName());
 	
 	@Override
+	@Transactional
 	public void run() {
 		for (Tag tag : tagRepository.findAll()){
 			LOGGER.info("Crawling tag: " + tag);
