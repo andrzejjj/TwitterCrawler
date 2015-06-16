@@ -46,6 +46,8 @@ public class CrawlRunnable implements Runnable {
 		stats.setCreationDate(new Date());
 		stats.setRecordsInserted(totalInserted);
 		stats.persist();
+		String message = "Pobrano " + totalInserted + " Tweetów.";
+		LOGGER.info(message);
 	}
 
 	public void setTweetService(TweetService tweetService) {

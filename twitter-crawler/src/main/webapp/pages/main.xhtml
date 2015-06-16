@@ -1,26 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../templates/layout.xhtml">
-  <ui:define name="content">
-    <p:panel id="mainPanel" toggleable="true" toggleSpeed="250">
-      <f:facet name="header">
-        <h:outputFormat value="#{messages.label_welcome_titlepane}">
-          <f:param value="#{applicationBean.appName}" />
-        </h:outputFormat>
-      </f:facet>
-      <p />
-      <h:outputText id="welcomeText" value="#{messages.label_welcome_text}" />
-	
-      <p />
-		<p:chart type="pie" model="#{mainBean.pieModel}" style="width:600px;height:400px" />
-		<p/>
-		<p:chart type="line" model="#{mainBean.lineChartModel}" style="width:600px;" />
-      <div id="media"></div>
-    </p:panel>
-  </ui:define>
+	<ui:define name="content">
+		<p:panel id="mainPanel" toggleable="true" toggleSpeed="250">
+			<f:facet name="header">
+				<h:outputFormat value="#{messages.label_welcome_titlepane}">
+					<f:param value="#{applicationBean.appName}" />
+				</h:outputFormat>
+			</f:facet>
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+			</h:form>
+			<p />
+			<h:outputText id="welcomeText" value="#{messages.label_welcome_text}" />
+
+			<p />
+			<div id="pieChart">
+				<p:chart type="pie" model="#{mainBean.pieModel}"
+					style="width:600px;height:400px" />
+			</div>
+
+			<h:form id="lineChart">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="popup" value="Od kiedy pokazać statystyki: " />
+					<p:calendar id="popup" value="#{mainBean.dateSince}" />
+					<h:outputText value="Pokaż rekordy z 0 tweetami: " />
+					<p:selectBooleanButton id="showZeroes"
+						value="#{mainBean.showZeroes}" onLabel="Tak" offLabel="Nie"
+						style="width:60px">
+						<p:ajax update="lineChart" />
+					</p:selectBooleanButton>
+					<p:commandButton value="Pokaż" update="@parent:@parent"
+						icon="ui-icon-check" />
+				</h:panelGrid>
+				<p:chart type="line" model="#{mainBean.lineChartModel}"
+					style="width:600px;" />
+			</h:form>
+			<p />
+			<h:form id="tagsData">
+				<p:dataTable var="tag" value="#{mainBean.tags}">
+					<p:column headerText="Tag">
+						<h:outputText value="#{tag.content}" />
+					</p:column>
+
+					<p:column headerText="Akcja">
+						<p:commandLink id="deleteTag" update="mainPanel"
+							actionListener="#{mainBean.delete(tag)}">
+							<h:outputText value="Usun" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel for="newTag" value="Nowy tag: " />
+					<p:inputText id="newTag" value="#{mainBean.newTag}" required="true"
+						label="newTag">
+						<f:validateLength minimum="4" />
+					</p:inputText>
+					<p:message for="newTag" display="icon" />
+					<p:commandButton value="Zapisz" update="mainPanel"
+						actionListener="#{mainBean.insert}" icon="ui-icon-check" />
+				</h:panelGrid>
+			</h:form>
+			<div id="media"></div>
+		</p:panel>
+	</ui:define>
 </ui:composition>
 </html>
